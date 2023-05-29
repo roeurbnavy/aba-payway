@@ -1,0 +1,11 @@
+{
+  "public": {
+    "appName": "MeteorApp"
+  },
+  "s3": {
+    "key": "AKIA4UGGES5WGLIUT64Q",
+    "secret": "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",
+    "bucket": "file-uploads-meteor",
+    "region": "ap-southeast-1"
+  }
+}
