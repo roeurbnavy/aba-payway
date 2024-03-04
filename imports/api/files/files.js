@@ -5,9 +5,7 @@ import { FilesCollection } from "meteor/ostrio:files";
 import { forEach } from "lodash";
 import { getFilePath } from "./path";
 
-/* http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html */
-/* See fs-extra and graceful-fs NPM packages */
-/* For better i/o performance */
+// https://github.com/veliovgroup/Meteor-Files/blob/master/docs/google-cloud-storage-integration.md
 const { appName = "App" } = Meteor.settings.public;
 
 const bound = Meteor.bindEnvironment((callback) => {
@@ -40,10 +38,6 @@ const Files = new FilesCollection({
     return getFilePath();
   },
   collectionName: "app_files",
-  // allowClientCode: false,
-  // permissions: 777,
-  // parentDirPermissions: 777,
-  // Start moving files to AWS:S3
   // after fully received by the Meteor server
   onAfterUpload(fileRef) {
     forEach(fileRef.versions, (vRef, version) => {
@@ -64,7 +58,7 @@ const Files = new FilesCollection({
           if (error) {
             console.error("Upload error :: ", error);
           } else {
-            // Update FilesCollection with link to the file at AWS
+            // Update FilesCollection with link to the file at google cloud storage
             const upd = { $set: {} };
             upd["$set"]["versions." + version + ".meta.pipePath"] = filePath;
 
@@ -77,7 +71,7 @@ const Files = new FilesCollection({
                 if (updError) {
                   console.error(updError);
                 } else {
-                  // Unlink original files from FS after successful upload to AWS:S3
+                  // Unlink original files from FS after successful upload to google cloud storage
                   this.unlink(this.collection.findOne(fileRef._id), version);
                 }
               }
@@ -86,28 +80,6 @@ const Files = new FilesCollection({
         });
       });
     });
-  },
-  interceptDownload(http, fileRef, version) {
-    let ref, ref1, ref2;
-    const path =
-      (ref = fileRef.versions) != null
-        ? (ref1 = ref[version]) != null
-          ? (ref2 = ref1.meta) != null
-            ? ref2.pipePath
-            : void 0
-          : void 0
-        : void 0;
-    const vRef = ref1;
-    if (path) {
-      // If file is moved to Google Cloud Storage
-      // We will pipe request to Google Cloud Storage
-      // So, original link will stay always secure
-      const remoteReadStream = getReadableStream(http, path, vRef);
-      this.serve(http, fileRef, vRef, version, remoteReadStream);
-      return true;
-    }
-    // While the file has not been uploaded to Google Cloud Storage, we will serve it from the filesystem
-    return false;
   },
 });
 
@@ -132,70 +104,5 @@ Files.remove = function (selector, callback) {
   // Remove original file from database
   _origRemove.call(this, selector, callback);
 };
-
-function getReadableStream(http, path, vRef) {
-  let array,
-    end,
-    partial,
-    remoteReadStream,
-    reqRange,
-    responseType,
-    start,
-    take;
-
-  if (http.request.headers.range) {
-    partial = true;
-    array = http.request.headers.range.split(/bytes=([0-9]*)-([0-9]*)/);
-    start = parseInt(array[1]);
-    end = parseInt(array[2]);
-    if (isNaN(end)) {
-      end = vRef.size - 1;
-    }
-    take = end - start;
-  } else {
-    start = 0;
-    end = vRef.size - 1;
-    take = vRef.size;
-  }
-
-  if (
-    partial ||
-    (http.params.query.play && http.params.query.play === "true")
-  ) {
-    reqRange = {
-      start: start,
-      end: end,
-    };
-    if (isNaN(start) && !isNaN(end)) {
-      reqRange.start = end - take;
-      reqRange.end = end;
-    }
-    if (!isNaN(start) && isNaN(end)) {
-      reqRange.start = start;
-      reqRange.end = start + take;
-    }
-    if (start + take >= vRef.size) {
-      reqRange.end = vRef.size - 1;
-    }
-    if (reqRange.start >= vRef.size - 1 || reqRange.end > vRef.size - 1) {
-      responseType = "416";
-    } else {
-      responseType = "206";
-    }
-  } else {
-    responseType = "200";
-  }
-
-  if (responseType === "206") {
-    remoteReadStream = bucket.file(path).createReadStream({
-      start: reqRange.start,
-      end: reqRange.end,
-    });
-  } else if (responseType === "200") {
-    remoteReadStream = bucket.file(path).createReadStream();
-  }
-
-  return remoteReadStream;
-}
 
 export default Files;
