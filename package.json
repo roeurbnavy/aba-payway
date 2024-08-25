@@ -12,6 +12,8 @@
     "@babel/runtime": "^7.17.9",
     "@google-cloud/storage": "^7.7.0",
     "aws-sdk": "^2.1386.0",
+    "body-parser": "^1.20.2",
+    "crypto-js": "^4.2.0",
     "lodash": "^4.17.21",
     "meteor-node-stubs": "^1.2.1",
     "vue": "^3.2.45",

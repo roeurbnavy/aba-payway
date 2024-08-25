@@ -9,18 +9,18 @@
         "./*"
       ],
       "meteor/mongo": [
-        "/Users/vy/.meteor/packages/mongo/1.16.6/web.browser/local_collection_driver.js",
-        "/Users/vy/.meteor/packages/mongo/1.16.6/web.browser/collection.js",
-        "/Users/vy/.meteor/packages/mongo/1.16.6/web.browser/connection_options.js",
-        "/Users/vy/.meteor/packages/mongo/1.16.6/web.browser/doc_fetcher.js",
-        "/Users/vy/.meteor/packages/mongo/1.16.6/web.browser/mongo_driver.js",
-        "/Users/vy/.meteor/packages/mongo/1.16.6/web.browser/mongo_utils.js",
-        "/Users/vy/.meteor/packages/mongo/1.16.6/web.browser/observe_multiplex.js",
-        "/Users/vy/.meteor/packages/mongo/1.16.6/web.browser/oplog_observe_driver.js",
-        "/Users/vy/.meteor/packages/mongo/1.16.6/web.browser/oplog_tailing.js",
-        "/Users/vy/.meteor/packages/mongo/1.16.6/web.browser/oplog_v2_converter.js",
-        "/Users/vy/.meteor/packages/mongo/1.16.6/web.browser/polling_observe_driver.js",
-        "/Users/vy/.meteor/packages/mongo/1.16.6/web.browser/remote_collection_driver.js"
+        "/Users/rabbit/.meteor/packages/mongo/1.16.6/web.browser/local_collection_driver.js",
+        "/Users/rabbit/.meteor/packages/mongo/1.16.6/web.browser/collection.js",
+        "/Users/rabbit/.meteor/packages/mongo/1.16.6/web.browser/connection_options.js",
+        "/Users/rabbit/.meteor/packages/mongo/1.16.6/web.browser/doc_fetcher.js",
+        "/Users/rabbit/.meteor/packages/mongo/1.16.6/web.browser/mongo_driver.js",
+        "/Users/rabbit/.meteor/packages/mongo/1.16.6/web.browser/mongo_utils.js",
+        "/Users/rabbit/.meteor/packages/mongo/1.16.6/web.browser/observe_multiplex.js",
+        "/Users/rabbit/.meteor/packages/mongo/1.16.6/web.browser/oplog_observe_driver.js",
+        "/Users/rabbit/.meteor/packages/mongo/1.16.6/web.browser/oplog_tailing.js",
+        "/Users/rabbit/.meteor/packages/mongo/1.16.6/web.browser/oplog_v2_converter.js",
+        "/Users/rabbit/.meteor/packages/mongo/1.16.6/web.browser/polling_observe_driver.js",
+        "/Users/rabbit/.meteor/packages/mongo/1.16.6/web.browser/remote_collection_driver.js"
       ],
       "meteor/reactive-var": [
         "/Users/rabbit/.meteor/packages/reactive-var/1.0.12/web.browser/reactive-var.js"
@@ -33,7 +33,7 @@
         "/Users/rabbit/.meteor/packages/es5-shim/4.8.0/web.browser/import_globals.js"
       ],
       "meteor/ecmascript": [
-        "/Users/vy/.meteor/packages/ecmascript/0.16.7/web.browser/ecmascript.js"
+        "/Users/rabbit/.meteor/packages/ecmascript/0.16.7/web.browser/ecmascript.js"
       ],
       "meteor/shell-server": [
         "/Users/rabbit/.meteor/packages/shell-server/0.5.0/web.browser/main.js",
@@ -45,8 +45,8 @@
         "/Users/rabbit/.meteor/packages/hot-module-replacement/0.5.3/web.browser/server.js"
       ],
       "meteor/vite:bundler": [
-        "/Users/vy/.meteor/packages/vite_bundler/0.1.9/web.browser/build.js",
-        "/Users/vy/.meteor/packages/vite_bundler/0.1.9/web.browser/server.js"
+        "/Users/rabbit/.meteor/packages/vite_bundler/0.1.9/web.browser/build.js",
+        "/Users/rabbit/.meteor/packages/vite_bundler/0.1.9/web.browser/server.js"
       ],
       "meteor/ostrio:files": [
         "/Users/rabbit/.meteor/packages/ostrio_files/2.3.3/web.browser/client.js",
